@@ -14,28 +14,27 @@
         event.preventDefault();
         const form = document.getElementById('examForm');
         const formData = new FormData(form);
-        
         const name = formData.get('name');
         const email = formData.get('email');
         const matricNumber = formData.get('matric_number');
         const phone = formData.get('phone');
-        
-        const answers = {
-            q1: formData.get('q1'),
-            q2: formData.get('q2'),
-            q3: formData.get('q3'),
-            // Add more questions here based on the structure in the HTML
-        };
+
+        // Collect all selected answers
+        const answers = {};
+        const questions = ['q1', 'q2', 'q3']; // Add more question names here as needed
+        questions.forEach(question => {
+            answers[question] = formData.get(question);
+        });
 
         const adminEmail = 'mondaykingsley80@gmail.com';
         const subject = 'New Exam Submission';
         let body = `Student ${name} with matric number ${matricNumber} has submitted the exam.\n\n`;
-        
+
         // Append answers to the body
         body += 'Answers:\n';
-        for (const [question, answer] of Object.entries(answers)) {
-            body += `Question ${question}: ${answer}\n`;
-        }
+        questions.forEach(question => {
+            body += `Question ${question.slice(1)}: ${answers[question]}\n`;
+        });
 
         // Send email to admin
         window.location.href = `mailto:${adminEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -55,5 +54,4 @@
         }
     }
 </script>
-
 
