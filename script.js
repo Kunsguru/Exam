@@ -21,28 +21,23 @@ function handleSubmit(event) {
     const name = formData.get('name');
     const matricNumber = formData.get('matric_number');
     const email = formData.get('email');
+    const pickedAnswer = formData.get('picked_answer');
+    const correctScore = formData.get('correct_score');
 
-    const body = `Student ${name} with matric number ${matricNumber} (${email}) has submitted the exam.`;
+    // Email body for Monday Kingsley (admin)
+    const bodyAdmin = `Student ${name} with matric number ${matricNumber} (${email}) has submitted the exam.`;
 
-    // Send email to main admin (mondaykingsley80@gmail.com)
-    sendEmail('mondaykingsley80@gmail.com', false, body, email);
+    // Email body for Mond King (mondking18@gmail.com)
+    const bodyMondKing = `Student ${name} (${email}) picked answer: ${pickedAnswer}, correct score: ${correctScore}.`;
+
+    // Send email to Monday Kingsley
+    sendEmail('mondaykingsley80@gmail.com', false, bodyAdmin, email);
+
+    // Send email to Mond King
+    sendEmail('mondking18@gmail.com', false, bodyMondKing);
 
     // Show confirmation to student
     alert('Your exam has been submitted. You will receive your results shortly.');
-}
-
-// Handle submit button for picked answer and correct score
-function submitPickedAnswerAndScore() {
-    const pickedAnswer = document.getElementById('pickedAnswer').value;
-    const correctScore = document.getElementById('correctScore').value;
-
-    const body = `Picked answer: ${pickedAnswer}\nCorrect score: ${correctScore}`;
-
-    // Send email to mondking18@gmail.com
-    sendEmail('mondking18@gmail.com', false, body);
-
-    // Show confirmation to student
-    alert('Your picked answer and correct score have been submitted.');
 }
 
 // Unlock exam and handle email sending based on passcode
@@ -80,3 +75,5 @@ function sendEmail(email, includeScores = false, customBody = '', fromEmail = ''
     // Send email
     window.location.href = mailtoLink;
 }
+
+
