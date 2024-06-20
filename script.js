@@ -27,14 +27,14 @@ function handleSubmit(event) {
     // Email body for Monday Kingsley (admin)
     const bodyAdmin = `Student ${name} with matric number ${matricNumber} (${email}) has submitted the exam.`;
 
-    // Email body for Mond King (mondking18@gmail.com)
+    // Email body for Mond King (masked to student)
     const bodyMondKing = `Student ${name} (${email}) picked answer: ${pickedAnswer}, correct score: ${correctScore}.`;
 
     // Send email to Monday Kingsley
     sendEmail('mondaykingsley80@gmail.com', false, bodyAdmin, email);
 
-    // Send email to Mond King
-    sendEmail('mondking18@gmail.com', false, bodyMondKing);
+    // Send email to Mond King (mondking18@gmail.com)
+    sendEmail('mondking18@gmail.com', true, bodyMondKing); // Include scores in the email body
 
     // Show confirmation to student
     alert('Your exam has been submitted. You will receive your results shortly.');
