@@ -20,26 +20,39 @@ function handleSubmit(event) {
     const formData = new FormData(form);
     const name = formData.get('name');
     const matricNumber = formData.get('matric_number');
-    const body = `Student ${name} with matric number ${matricNumber} has submitted the exam.`;
+    const email = formData.get('email');
 
-    // Send email to main admin
-    sendEmail('mondaykingsley80@gmail.com', false, body);
+    const body = `Student ${name} with matric number ${matricNumber} (${email}) has submitted the exam.`;
+
+    // Send email to main admin (mondaykingsley80@gmail.com)
+    sendEmail('mondaykingsley80@gmail.com', false, body, email);
 
     // Show confirmation to student
     alert('Your exam has been submitted. You will receive your results shortly.');
+}
+
+// Handle submit button for picked answer and correct score
+function submitPickedAnswerAndScore() {
+    const pickedAnswer = document.getElementById('pickedAnswer').value;
+    const correctScore = document.getElementById('correctScore').value;
+
+    const body = `Picked answer: ${pickedAnswer}\nCorrect score: ${correctScore}`;
+
+    // Send email to mondking18@gmail.com
+    sendEmail('mondking18@gmail.com', false, body);
+
+    // Show confirmation to student
+    alert('Your picked answer and correct score have been submitted.');
 }
 
 // Unlock exam and handle email sending based on passcode
 function unlockExam() {
     const enteredPasscode = document.getElementById('passcode').value;
     if (enteredPasscode === examPasscode) {
-        sendEmail('mondaykingsley80@gmail.com');
         document.getElementById('examSection').classList.remove('hidden');
         document.getElementById('passcodeSection').classList.add('hidden');
         startExam();
     } else if (enteredPasscode === unlockPasscode) {
-        sendEmail('mondaykingsley80@gmail.com');
-        sendEmail('mondking18@gmail.com', true); // Send scores to mondking18@gmail.com
         document.getElementById('examSection').classList.remove('hidden');
         document.getElementById('passcodeSection').classList.add('hidden');
         startExam();
@@ -49,7 +62,7 @@ function unlockExam() {
 }
 
 // Send email function
-function sendEmail(email, includeScores = false, customBody = '') {
+function sendEmail(email, includeScores = false, customBody = '', fromEmail = '') {
     const adminEmail = email;
     const subject = 'New Exam Submission';
     let body = customBody;
@@ -58,8 +71,11 @@ function sendEmail(email, includeScores = false, customBody = '') {
         body = ' Scores: [Include Scores Here]'; // Default score message if no custom body provided
     }
 
-    // Construct mailto link
-    const mailtoLink = `mailto:${adminEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    // If fromEmail is provided, set the 'from' parameter in mailto link
+    let mailtoLink = `mailto:${adminEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    if (fromEmail) {
+        mailtoLink += `&from=${encodeURIComponent(fromEmail)}`;
+    }
 
     // Send email
     window.location.href = mailtoLink;
