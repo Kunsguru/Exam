@@ -1,5 +1,4 @@
-<script>
-    const examPasscode = 'exam2024'; // Define the passcode here
+const examPasscode = 'exam2024'; // Define the passcode here
 
     function startExam() {
         let duration = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
@@ -53,5 +52,4 @@
             alert('Incorrect passcode. Please try again.');
         }
     }
-</script>
 
