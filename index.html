@@ -1,0 +1,71 @@
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Week1 Test</h1>
+        <h2>Basic Sewing</h2>
+        
+        <!-- Passcode Section -->
+        <div id="passcodeSection">
+            <div class="form-group">
+                <label for="passcode">Enter Passcode:</label>
+                <input type="password" id="passcode" required>
+            </div>
+            <button type="button" class="button" onclick="unlockExam()">Unlock Exam</button>
+        </div>
+        
+        <!-- Exam Section (Hidden by Default) -->
+        <div id="examSection" class="hidden">
+            <form id="examForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="matric_number">Matriculation Number:</label>
+                    <input type="text" id="matric_number" name="matric_number" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+
+                <!-- Questions -->
+                <ol>
+                    <!-- Question 1 -->
+                    <li>
+                        <p>Question 1: What is the first step in preparing fabric for sewing?</p>
+                        <label><input type="radio" name="q1" value="a" required> a) Washing the fabric</label><br>
+                        <label><input type="radio" name="q1" value="b"> b) Cutting the fabric</label><br>
+                        <label><input type="radio" name="q1" value="c"> c) Ironing the fabric</label><br>
+                        <label><input type="radio" name="q1" value="d"> d) Pinning the fabric</label>
+                    </li>
+                    <!-- Question 2 -->
+                    <li>
+                        <p>Question 2: Which type of stitch is commonly used to prevent fabric edges from fraying?</p>
+                        <label><input type="radio" name="q2" value="a" required> a) Straight stitch</label><br>
+                        <label><input type="radio" name="q2" value="b"> b) Zigzag stitch</label><br>
+                        <label><input type="radio" name="q2" value="c"> c) Basting stitch</label><br>
+                        <label><input type="radio" name="q2" value="d"> d) Blind stitch</label>
+                    </li>
+                    <!-- Question 3 -->
+                    <li>
+                        <p>Question 3: What is a seam ripper used for?</p>
+                        <label><input type="radio" name="q3" value="a" required> a) Cutting fabric</label><br>
+                        <label><input type="radio" name="q3" value="b"> b) Measuring fabric</label><br>
+                        <label><input type="radio" name="q3" value="c"> c) Removing stitches</label><br>
+                        <label><input type="radio" name="q3" value="d"> d) Ironing fabric</label>
+                    </li>
+                    <!-- Repeat similar blocks for questions 4 to 100 -->
+                </ol>
+                <input type="submit" class="button" value="Submit">
+            </form>
+        </div>
+    </div>
+  <script src="script.js"></script>
+</body>
+</html>
